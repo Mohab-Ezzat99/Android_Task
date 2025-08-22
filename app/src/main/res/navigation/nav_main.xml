@@ -3,11 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_auth"
-    app:startDestination="@id/allLeaguesFragment">
+    app:startDestination="@id/addUserFragment">
 
     <fragment
-        android:id="@+id/allLeaguesFragment"
-        android:name="com.app.task.presentation.fragment.allLeagues.AllUsersFragment"
+        android:id="@+id/allUsersFragment"
+        android:name="com.app.task.presentation.fragment.allUsers.AllUsersFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_all_users" />
+        tools:layout="@layout/fragment_all_users" >
+        <action
+            android:id="@+id/action_allUsersFragment_to_addUserFragment"
+            app:destination="@id/addUserFragment"
+            app:popUpTo="@id/allUsersFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/addUserFragment"
+        android:name="com.app.task.presentation.fragment.addUser.AddUserFragment"
+        android:label="AddUserFragment"
+        tools:layout="@layout/fragment_add_user">
+        <action
+            android:id="@+id/action_addUserFragment_to_allUsersFragment"
+            app:destination="@id/allUsersFragment"
+            app:popUpTo="@id/addUserFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

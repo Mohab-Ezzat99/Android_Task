@@ -1,4 +1,4 @@
-package com.app.task.presentation.fragment.allLeagues
+package com.app.task.presentation.fragment.allUsers
 
 import androidx.lifecycle.viewModelScope
 import com.app.task.base.BaseViewModel
@@ -15,13 +15,13 @@ class AllUsersViewModel @Inject constructor(
     private val getAllUsersUseCase: GetAllUsersUseCase
 ) : BaseViewModel() {
 
-    private val _allLeaguesState by lazy { MutableStateFlow<List<UserEntity>?>(null) }
-    val allLeaguesState: StateFlow<List<UserEntity>?> by lazy { _allLeaguesState }
+    private val _allUsersResponse by lazy { MutableStateFlow<List<UserEntity>?>(null) }
+    val allUsersResponse: StateFlow<List<UserEntity>?> by lazy { _allUsersResponse }
 
     fun getAllUsers() {
         viewModelScope.launch {
             getAllUsersUseCase().collect {
-                _allLeaguesState.value = it
+                _allUsersResponse.emit(it)
             }
         }
     }

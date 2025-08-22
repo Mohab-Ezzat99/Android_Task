@@ -9,8 +9,8 @@ class MainRepositoryImpl @Inject constructor(
     private val dao: AppDao,
 ) : MainRepository {
 
-    override suspend fun insertUser(userEntity: UserEntity) {
-        dao.insertUser(userEntity)
+    override suspend fun insertUser(userEntity: UserEntity) : Long {
+        return dao.insertUser(userEntity)
     }
 
     override suspend fun getAllUsers(): List<UserEntity> {

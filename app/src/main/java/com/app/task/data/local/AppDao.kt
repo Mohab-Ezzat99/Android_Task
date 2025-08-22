@@ -9,7 +9,7 @@ import com.app.task.data.local.entity.UserEntity
 interface AppDao {
 
     @Upsert
-    suspend fun insertUser(userEntity: UserEntity)
+    suspend fun insertUser(userEntity: UserEntity) : Long
 
     @Query("SELECT * FROM UserEntity")
     suspend fun getAllUsers(): List<UserEntity>

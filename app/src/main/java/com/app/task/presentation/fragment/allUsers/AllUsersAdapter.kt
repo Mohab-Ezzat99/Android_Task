@@ -1,4 +1,4 @@
-package com.app.task.presentation.fragment.allLeagues
+package com.app.task.presentation.fragment.allUsers
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

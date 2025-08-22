@@ -1,8 +1,8 @@
-package com.app.task.presentation.fragment.allLeagues
+package com.app.task.presentation.fragment.allUsers
 
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
-import com.app.task.R
+import androidx.navigation.fragment.findNavController
 import com.app.task.base.BaseFragment
 import com.app.task.databinding.FragmentAllUsersBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +21,7 @@ class AllUsersFragment :
 
     override fun observer() {
         lifecycleScope.launchWhenStarted {
-            viewModel.allLeaguesState.collect {
+            viewModel.allUsersResponse.collect {
                 if (it.isNullOrEmpty().not()) {
                     allUsersAdapter.setData(it)
                 }
@@ -31,7 +31,7 @@ class AllUsersFragment :
 
     override fun FragmentAllUsersBinding.clicks() {
         fabAdd.setOnClickListener {
-
+            findNavController().navigate(AllUsersFragmentDirections.actionAllUsersFragmentToAddUserFragment())
         }
     }
 

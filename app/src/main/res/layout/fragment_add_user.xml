@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:orientation="vertical"
+    android:padding="@dimen/_16sdp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/add_new_user"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_22ssp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@drawable/stroke_black"
+        android:hint="@string/name"
+        android:inputType="text"
+        android:padding="@dimen/_8sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12ssp" />
+
+    <EditText
+        android:id="@+id/etJobTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@drawable/stroke_black"
+        android:hint="@string/jon_title"
+        android:inputType="text"
+        android:padding="@dimen/_8sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12ssp" />
+
+    <EditText
+        android:id="@+id/etAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@drawable/stroke_black"
+        android:hint="@string/age"
+        android:inputType="number"
+        android:padding="@dimen/_8sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12ssp" />
+
+    <RadioGroup
+        android:id="@+id/rgGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbMale"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/male"
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/rbFemale"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/female" />
+
+    </RadioGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="@string/confirm"
+        android:textAllCaps="false" />
+
+</LinearLayout>
