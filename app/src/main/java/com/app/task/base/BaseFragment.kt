@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.app.task.util.LoadingDialog
 
 abstract class BaseFragment<B : ViewBinding, V : BaseViewModel>(
     open val bindingInflater: (LayoutInflater) -> B
@@ -18,6 +19,9 @@ abstract class BaseFragment<B : ViewBinding, V : BaseViewModel>(
 
     private var _binding: B? = null
     open val binding get() = checkNotNull(_binding)
+
+    private val loadingDialogDelegate = lazy { LoadingDialog(activity) }
+    private val loadingDialog by loadingDialogDelegate
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,8 +46,15 @@ abstract class BaseFragment<B : ViewBinding, V : BaseViewModel>(
     open fun callApis() {}
     open fun observer() {}
 
+    fun showLoading() = loadingDialog.showDialog()
+
+    fun hideLoading() = loadingDialog.hideDialog()
+
     override fun onDestroy() {
         _binding = null
+        if (loadingDialogDelegate.isInitialized()) {
+            loadingDialog.clean()
+        }
         super.onDestroy()
     }
 }

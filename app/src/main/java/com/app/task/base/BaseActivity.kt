@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.app.task.R
+import com.app.task.util.LoadingDialog
 
 abstract class BaseActivity<B : ViewBinding>(
     open val bindingInflater: (LayoutInflater) -> B

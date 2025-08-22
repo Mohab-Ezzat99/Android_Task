@@ -8,7 +8,10 @@ import com.app.task.R
 import com.app.task.base.BaseFragment
 import com.app.task.data.local.entity.UserEntity
 import com.app.task.databinding.FragmentAddUserBinding
+import com.app.task.util.LoadingDialog
+import com.app.task.util.MyUtil.collect
 import com.app.task.util.MyUtil.showMessage
+import com.app.task.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,10 +21,25 @@ class AddUserFragment :
     override fun viewModelClass(): Class<AddUserViewModel> = AddUserViewModel::class.java
 
     override fun observer() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.addUserResponse.collect {
-                showMessage(getString(R.string.user_added_successfully))
-                findNavController().navigate(AddUserFragmentDirections.actionAddUserFragmentToAllUsersFragment())
+        collect(viewModel.addUserResponse) {
+            when (it) {
+                Resource.Loading -> showLoading()
+
+                is Resource.Success -> {
+                    hideLoading()
+                    binding.tvError.text = ""
+                    showMessage(getString(R.string.user_added_successfully))
+                    findNavController().navigate(AddUserFragmentDirections.actionAddUserFragmentToAllUsersFragment())
+                }
+
+                is Resource.Failure -> {
+                    hideLoading()
+                    it.messageId?.let { message ->
+                        binding.tvError.text = getString(message)
+                    } ?: showMessage(it.message ?: "")
+                }
+
+                else -> {}
             }
         }
     }
@@ -37,7 +55,7 @@ class AddUserFragment :
                 UserEntity(
                     name = etName.text.toString().trim(),
                     jobTitle = etJobTitle.text.toString().trim(),
-                    age = etAge.text.toString().trim().toInt(),
+                    age = etAge.text.toString().trim(),
                     gender = selectedGender
                 )
             )

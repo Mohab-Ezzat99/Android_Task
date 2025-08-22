@@ -10,5 +10,8 @@
     <string name="female">Female</string>
     <string name="confirm">Confirm</string>
     <string name="user_added_successfully">User added successfully!</string>
+    <string name="empty_name">Empty name</string>
+    <string name="empty_job_title">Empty job title</string>
+    <string name="empty_age">Empty age</string>
 
 </resources>

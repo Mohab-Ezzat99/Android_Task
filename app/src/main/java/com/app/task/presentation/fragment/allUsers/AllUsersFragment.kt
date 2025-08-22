@@ -1,10 +1,13 @@
 package com.app.task.presentation.fragment.allUsers
 
 import android.os.Bundle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.app.task.base.BaseFragment
 import com.app.task.databinding.FragmentAllUsersBinding
+import com.app.task.util.LoadingDialog
+import com.app.task.util.MyUtil.collect
+import com.app.task.util.MyUtil.showMessage
+import com.app.task.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,11 +23,23 @@ class AllUsersFragment :
     }
 
     override fun observer() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.allUsersResponse.collect {
-                if (it.isNullOrEmpty().not()) {
-                    allUsersAdapter.setData(it)
+        collect(viewModel.allUsersResponse) {
+            when (it) {
+                Resource.Loading -> showLoading()
+
+                is Resource.Success -> {
+                    hideLoading()
+                    it.value?.let { result ->
+                        allUsersAdapter.setData(result)
+                    }
                 }
+
+                is Resource.Failure -> {
+                    hideLoading()
+                    showMessage(it.message.toString())
+                }
+
+                else -> {}
             }
         }
     }

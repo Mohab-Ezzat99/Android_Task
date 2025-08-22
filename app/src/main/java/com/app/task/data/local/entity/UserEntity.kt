@@ -8,7 +8,7 @@ data class UserEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
-    val age: Int,
+    val age: String,
     val jobTitle: String,
     val gender: String,
 )
